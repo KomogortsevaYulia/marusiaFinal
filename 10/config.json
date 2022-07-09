@@ -1,0 +1,50 @@
+{
+    "finishSound": "<speaker audio=marusia-sounds/game-win-1>",
+    "deck": [
+        {
+            "answers": 6,
+            "tts": "Шесть",
+            "value": 6
+        },
+        {
+            "answers": "7",
+            "tts": "Семь",
+            "value": 7
+        },
+        {
+            "answers": "8",
+            "tts": "Восемь",
+            "value":8
+        },
+        {
+            "answers": "9",
+            "tts": "Девять",
+            "value": 9
+        },
+        {
+            "answers": "10",
+            "tts": "Десять",
+            "value": 10
+        },
+        {
+            "answers": "Валет",
+            "tts": "Валет",
+            "value": 2
+        },
+        {
+            "answers": "Дама",
+            "tts": "Дама",
+            "value": 3
+        },
+        {
+            "answers": "Кароль",
+            "tts": "Каро+ль",
+            "value": 4
+        },
+        {
+            "answers": "Туз",
+            "tts": "Туз",
+            "value": 11
+        }
+    ]
+}

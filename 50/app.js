@@ -43,7 +43,6 @@ var game ={
 		this.randomNum();    // Число 2/4 генерируется случайным образом в начале игры
 		this.randomNum();
 		     // Выполняем функцию dataView, когда игра начинает передавать обновление данных на страницу, обновляем данные на странице
-		// console.log(this.mydata);
 	},
 
 	randomNum:function(){       // Метод генерации случайных чисел и присвоения начального случайного числа mydata
@@ -60,16 +59,16 @@ var game ={
 
 
 	dataView:function(table){      // Метод передачи данных на страницу и контроль смены стиля
-		for(var r = 0;r < 4;r++){
+		let tab=``;
+    for(var r = 0;r < 4;r++){
+      tab=tab+`|`;
 			for(var c = 0;c < 4;c++){
-				var div = document.getElementById("c" + r + c);
-				let tab=``;
-        game.d.forEach(function(entry) {
-          tab=tab+`|`+entry[0]+`|`+entry[1]+`|`+entry[2]+`|`+entry[3]+`| \n `;
-        });
-        
+
+          tab=tab+this.mydata[r][c]
 			}
+      tab=tab+`| \n `;
 		}
+    console.log(this.mydata)
     return tab
 	},
 
@@ -306,7 +305,7 @@ app.post('/marusia-2048', async (res, req) => {
     if(inputText.contains(initString)) {
       game.start();
 
-      let tab=this.dataView();
+      let tab=game.dataView();
         return req.send(sendResponse(`Добро пожаловать в игру "2048"! \n Доступные команды: "Налево","Направо","Вниз","Вверх"  \n 
             Таблица: \n ${tab} `, 
             res.body.session,{
@@ -327,7 +326,8 @@ app.post('/marusia-2048', async (res, req) => {
 
       //сначала двигаем 
       if(['налево','лево','влево'].includes(answer)){
-        game.moveLeft();
+       
+         game.moveLeft();
       }else if(['направо','право','вправо'].includes(answer)){
         game.moveRight();
       }else if(['вниз'].includes(answer)){
@@ -336,27 +336,34 @@ app.post('/marusia-2048', async (res, req) => {
         game.moveTop();
       }
       }
-      //потом добавляем новый квадрат
-      let x=Math.floor(Math.random() * 4);
-      let y=Math.floor(Math.random() * 4);
-      if(table[x][y]==0){
-        table[x][y]=2
-      }
-
-      let tab=this.dataView();
-
-      return req.send(sendResponse(`Счёт:${game.score} \n Доступные команды: "Налево","Направо","Вниз","Вверх"  \n 
+      
+      let tab=game.dataView();
+      if (game.status == game.gameover) {
+        return req.send(sendResponse(`Вы проиграли!Счёт:${game.score}  \n 
           Таблица: \n ${tab} `, 
           res.body.session,{
           },
-          `Счёт:${game.score} " `,false,[
+          `Вы проиграли!Счёт:${game.score} " `,false,[
               {"title": "Налево"},
               {"title": "Направо"},
               {"title": "Вниз"},
               {"title": "Вверх"}
             ]
       ))
-        
+      }
+      else{
+        return req.send(sendResponse(`Счёт:${game.score} \n Доступные команды: "Налево","Направо","Вниз","Вверх"  \n 
+        Таблица: \n ${tab} `, 
+        res.body.session,{
+        },
+        `Счёт:${game.score} " `,false,[
+            {"title": "Налево"},
+            {"title": "Направо"},
+            {"title": "Вниз"},
+            {"title": "Вверх"}
+          ]
+    ))
+      }
     }
 
 

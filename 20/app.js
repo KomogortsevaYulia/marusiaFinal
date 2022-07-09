@@ -3,18 +3,17 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const config = require('./config')
 const morgan = require('morgan')
-const port = 3000;
+const port = 8888;
 const initString = 'старт' 
-const questions = config.questions 
-const deck = config.deck 
+const chain = config.chain 
 const app = express();
-const mergeImages =require('merge-images') ;
 
-const sendResponse = (text, session, session_state = {}, TTStext = text, end_session = false, card = []) => {
+const sendResponse = (text, session, session_state = {}, TTStext = text, end_session = false, buttons = []) => {
     return {
         "response": {
             "text": text,
             "tts": TTStext,
+            "buttons":buttons,
             "end_session": end_session,
         },
         "session": {
@@ -38,92 +37,78 @@ app.use(
     })
 );
 
-app.post('/marusia-twenty-one', async (res, req) => {
+app.post('/marusia-edible-inedible', async (res, req) => {
     
-    const request = res.body
-    const command = request.request.command   
+    const request = res.body  
     const inputText = request.request.nlu.tokens 
 
     if(inputText.contains(initString)) {
-        let card=deck[Math.floor(Math.random() * deck.length)]
-        let card2=deck[Math.floor(Math.random() * deck.length)]
-        return req.send(sendResponse(`Добро пожаловать в игру "Двадцать одно"! \n Доступные команды: "Ещё","Хватит" \n 
-            Ваша первая карта: ${card.answers} \n Маруся так же взяла карту.`, 
+        let object=chain[0]
+
+        return req.send(sendResponse(`Добро пожаловать в игру "Съедобное — несъедобное"! \n Доступные команды: "Съем","Выброшу" \n 
+            Итак, первый предмет: ${object.title} ${object.smile}`, 
             res.body.session,{
-                "marusia": card2.answers,
-                "player": card.answers,
-                "marusiaScore": card2.value,
-                "playerScore": card.value 
+                "question": 0,
+                "objects": ``
             },
-            `Добро пожаловать в игру "Двадцать одно"! \n Доступные команды: "Ещё","Хватит" \n 
-            Ваша первая карта: ${card.answers} \n Маруся так же взяла карту.`
+            `Добро пожаловать в игру "Съедобное — несъедобное"! \n Доступные команды: "Съем","Выброшу" \n 
+            Итак, первый предмет: ${object.tts} `,false,[
+                {
+                  "title": "Съем"
+                },
+                {
+                    "title": "Выброшу"
+                }
+              ]
         ))
         
     }
 
-    if(['еще','ещё','хватит'].includes(inputText[0])) {
-         
-        let session_state = request.state.session
+    let answer = inputText[0] 
+    if(['съем','выброшу'].includes(answer)){{
 
-        if(['хватит'].includes(inputText[0])){
-            // маруся берет карты(делает это рандомно)
-            while(session_state.marusiaScore<=19 ){
-                var random = Math.random() < 0.5;
-                if(random){
-                    let card=deck[Math.floor(Math.random() * deck.length)]
-                    session_state.marusia=session_state.marusia+","+card.answers
-                    session_state.marusiaScore=session_state.marusiaScore+card.value 
-                }
+      let session_state = request.state.session
+      console.log(answer)
+      if(chain[session_state.question].edible.includes(answer)){
+        
+        if(session_state.question<chain.length){
+          let obj=chain[session_state.question+1]
+          session_state.objects=session_state.objects+chain[session_state.question].title+` ${chain[session_state.question].smile} - ${chain[session_state.question].edible}\n`;
+          return req.send(sendResponse(`Правильно! Правильные ответы :\n ${session_state.objects}\n Следующий объект:" ${obj.title} ${obj.smile}`, res.body.session, {
+            "question": session_state.question+1,
+            "objects": session_state.objects
+          }, ` Правильно! \n Следующий объект:" ${obj.title}`,false, [
+            {
+              "title": "Съем"
+            },
+            {
+                "title": "Выброшу"
             }
+          ]
+          ))
+        }else{
+          return req.send(sendResponse(`Вы выйграли! Правильные ответы :\n ${session_state.objects} \n Что бы начать заново,выполните команду "Старт"`, res.body.session, {
+            "question": 0,
+            "objects": session_state.objects
+          }, `${config.winSound} Вы выйграли! \n Что бы начать заново,выполните команду "Старт"`,true, [
+            {
+              "title": "Старт"
+            }
+          ]
+          ))
         }
-        if(['еще','ещё'].includes(inputText[0])) {
-            let card=deck[Math.floor(Math.random() * deck.length)]
-            let card2=deck[Math.floor(Math.random() * deck.length)]
-    
-            session_state.player=session_state.player+"; "+card.answers
-            session_state.playerScore=session_state.playerScore+card.value 
-            session_state.marusia=session_state.marusia+"; "+card2.answers
-            session_state.marusiaScore=session_state.marusiaScore+card2.value 
-
-        }
-            
-            if( (session_state.playerScore>21 & session_state.marusiaScore<=21) || (session_state.playerScore-session_state.marusiaScore<0 & session_state.marusiaScore<=21)
-                ){
-                return req.send(sendResponse(`Вы проиграли! Ваши карты : ${session_state.player} \nКарты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, res.body.session, {
-                    "marusia": session_state.marusia,
-                    "player": session_state.player,
-                    "marusiaScore": session_state.marusiaScore,
-                    "playerScore": session_state.playerScore
-                }, `Вы проиграли! Ваши карты : ${session_state.player} \nКарты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, false, 
-                ))
-            }else if( ((session_state.playerScore==session_state.marusiaScore) || 
-                (session_state.playerScore> 21 & session_state.marusiaScore>21) )
-                ){
-                return req.send(sendResponse(`Ничья! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, res.body.session, {
-                    "marusia": session_state.marusia,
-                    "player": session_state.player,
-                    "marusiaScore": session_state.marusiaScore,
-                    "playerScore": session_state.playerScore
-                }, `Ничья! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, false, 
-                ))
-            }
-            else if((session_state.playerScore<=21 & session_state.marusiaScore>21) || (session_state.playerScore>session_state.marusiaScore & session_state.playerScore<=21)){
-                return req.send(sendResponse(`Вы выйграли! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, res.body.session, {
-                    "marusia": session_state.marusia,
-                    "player": session_state.player,
-                    "marusiaScore": session_state.marusiaScore,
-                    "playerScore": session_state.playerScore
-                }, `Вы выйграли! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, false, 
-                ))
-            }
-            else{
-                return req.send(sendResponse(`Новая карта: ${card.answers} \n Ваши карты: ${session_state.player} 
-                \n\n Маруся так же берет карту.`, res.body.session, session_state, `Новая карта: ${card.answers} \n Ваши карты: ${session_state.player}
-                 \n\n Маруся так же берет карту.`)) 
-            }
-    }
-
-    return req.send(sendResponse('Неизвестная команда!', res.body.session))
-});
+      }else{
+        return req.send(sendResponse(`Вы проиграли! Правильные ответы :\n ${session_state.objects}\n Что бы начать заново,выполните команду "Старт"`, res.body.session, {
+          "question": 0,
+          "objects": session_state.objects
+        }, `${config.lossSound} Вы проиграли! \n Что бы начать заново,выполните команду "Старт"`,true, [
+          {
+            "title": "Старт"
+          }
+        ]
+        ))
+      }
+  }
+}});
 
 app.listen(port, () => console.log(` Сервер запущен на PORT=${port} `));

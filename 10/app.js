@@ -45,6 +45,7 @@ app.post('/marusia-twenty-one', async (res, req) => {
     if(inputText.contains(initString)) {
         let card=deck[Math.floor(Math.random() * deck.length)]
         let card2=deck[Math.floor(Math.random() * deck.length)]
+
         return req.send(sendResponse(`Добро пожаловать в игру "Двадцать одно"! \n Доступные команды: "Ещё","Хватит" \n 
             Ваша первая карта: ${card.answers} \n Маруся так же взяла карту.`, 
             res.body.session,{
@@ -54,7 +55,7 @@ app.post('/marusia-twenty-one', async (res, req) => {
                 "playerScore": card.value 
             },
             `Добро пожаловать в игру "Двадцать одно"! \n Доступные команды: "Ещё","Хватит" \n 
-            Ваша первая карта: ${card.answers} \n Маруся так же взяла карту.`,false,[
+            Ваша первая карта: ${card.tts} \n Маруся так же взяла карту.`,false,[
                 {
                   "title": "Еще"
                 },{
@@ -89,7 +90,7 @@ app.post('/marusia-twenty-one', async (res, req) => {
             "player": session_state.player,
             "marusiaScore": session_state.marusiaScore,
             "playerScore": session_state.playerScore
-        }, `Вы проиграли! Ваши карты : ${session_state.player} \nКарты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, true, [
+        }, `${config.lossSound} Вы проиграли! Ваши карты : ${session_state.player} \n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, [
         {
           "title": "Старт"
         }
@@ -103,7 +104,7 @@ app.post('/marusia-twenty-one', async (res, req) => {
             "player": session_state.player,
             "marusiaScore": session_state.marusiaScore,
             "playerScore": session_state.playerScore
-        }, `Ничья! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, true, [
+        }, `${config.winSound} Ничья! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, [
             {
               "title": "Старт"
             }
@@ -111,12 +112,12 @@ app.post('/marusia-twenty-one', async (res, req) => {
         ))
     }
     else if((session_state.playerScore<=21 & session_state.marusiaScore>21) || (session_state.playerScore>session_state.marusiaScore & session_state.playerScore<=21)){
-        return req.send(sendResponse(`Вы выйграли! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, res.body.session, {
+        return req.send(sendResponse(`Вы выйграли! Ваши карты : ${session_state.player} \n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, res.body.session, {
             "marusia": session_state.marusia,
             "player": session_state.player,
             "marusiaScore": session_state.marusiaScore,
             "playerScore": session_state.playerScore
-        }, `Вы выйграли! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, true, [
+        }, `${config.winSound} Вы выйграли! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`,  [
             {
               "title": "Старт"
             }
@@ -130,7 +131,6 @@ app.post('/marusia-twenty-one', async (res, req) => {
         let session_state = request.state.session
 
             let card=deck[Math.floor(Math.random() * deck.length)]
-            let card2=deck[Math.floor(Math.random() * deck.length)]
     
             session_state.player=session_state.player+"; "+card.answers
             session_state.playerScore=session_state.playerScore+card.value 
@@ -150,7 +150,7 @@ app.post('/marusia-twenty-one', async (res, req) => {
                     "player": session_state.player,
                     "marusiaScore": session_state.marusiaScore,
                     "playerScore": session_state.playerScore
-                }, `Вы проиграли! Ваши карты : ${session_state.player} \nКарты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, true, [
+                }, `${config.lossSound} Вы проиграли! Ваши карты : ${session_state.player} \nКарты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`,  [
                 {
                   "title": "Старт"
                 }
@@ -164,7 +164,7 @@ app.post('/marusia-twenty-one', async (res, req) => {
                     "player": session_state.player,
                     "marusiaScore": session_state.marusiaScore,
                     "playerScore": session_state.playerScore
-                }, `Ничья! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, true, [
+                }, `${config.winSound} Ничья! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, [
                     {
                       "title": "Старт"
                     }
@@ -177,7 +177,7 @@ app.post('/marusia-twenty-one', async (res, req) => {
                     "player": session_state.player,
                     "marusiaScore": session_state.marusiaScore,
                     "playerScore": session_state.playerScore
-                }, `Вы выйграли! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, true, [
+                }, `${config.winSound} Вы выйграли! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, [
                     {
                       "title": "Старт"
                     }
@@ -188,7 +188,7 @@ app.post('/marusia-twenty-one', async (res, req) => {
               
                 if (m){
                 return req.send(sendResponse(`Новая карта: ${card.answers} \n Ваши карты: ${session_state.player} 
-                \n Маруся так же берет карту.`, res.body.session, session_state, `Новая карта: ${card.answers} \n Ваши карты: ${session_state.player}
+                \n Маруся так же берет карту.`, res.body.session, session_state, `Новая карта: ${card.tts} \n Ваши карты: ${session_state.player}
                  \n Маруся так же берет карту.`,true,[
                     {
                       "title": "Еще"
@@ -198,7 +198,7 @@ app.post('/marusia-twenty-one', async (res, req) => {
                   ])) 
                 }else{
                   return req.send(sendResponse(`Новая карта: ${card.answers} \n Ваши карты: ${session_state.player} 
-                  \n Маруся не берет карту.`, res.body.session, session_state, `Новая карта: ${card.answers} \n Ваши карты: ${session_state.player}
+                  \n Маруся не берет карту.`, res.body.session, session_state, `Новая карта: ${card.tts} \n Ваши карты: ${session_state.player}
                    \n Маруся не берет карту.`,true,[
                       {
                         "title": "Еще"

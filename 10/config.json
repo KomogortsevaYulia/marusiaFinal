@@ -1,5 +1,6 @@
 {
-    "finishSound": "<speaker audio=marusia-sounds/game-win-1>",
+    "winSound": "<speaker audio=marusia-sounds/game-win-1>",
+    "lossSound": "<speaker audio=marusia-sounds/game-loss-1>",
     "deck": [
         {
             "answers": 6,
@@ -38,7 +39,7 @@
         },
         {
             "answers": "Кароль",
-            "tts": "Каро+ль",
+            "tts": "Кароль",
             "value": 4
         },
         {

@@ -68,7 +68,6 @@ app.post('/marusia-edible-inedible', async (res, req) => {
     if(['съем','выброшу'].includes(answer)){{
 
       let session_state = request.state.session
-      console.log(answer)
       if(chain[session_state.question].edible.includes(answer)){
         
         if(session_state.question<chain.length-1){

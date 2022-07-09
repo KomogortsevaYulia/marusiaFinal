@@ -71,13 +71,13 @@ app.post('/marusia-edible-inedible', async (res, req) => {
       console.log(answer)
       if(chain[session_state.question].edible.includes(answer)){
         
-        if(session_state.question<chain.length){
+        if(session_state.question<chain.length-1){
           let obj=chain[session_state.question+1]
           session_state.objects=session_state.objects+chain[session_state.question].title+` ${chain[session_state.question].smile} - ${chain[session_state.question].edible}\n`;
-          return req.send(sendResponse(`Правильно! Правильные ответы :\n ${session_state.objects}\n Следующий объект:" ${obj.title} ${obj.smile}`, res.body.session, {
+          return req.send(sendResponse(`Правильно! Правильные ответы :\n ${session_state.objects}\n Следующий объект: ${obj.title} ${obj.smile}`, res.body.session, {
             "question": session_state.question+1,
             "objects": session_state.objects
-          }, ` Правильно! \n Следующий объект:" ${obj.title}`,false, [
+          }, ` Правильно! \n Следующий объект: ${obj.title}`,false, [
             {
               "title": "Съем"
             },

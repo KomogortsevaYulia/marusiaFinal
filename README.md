@@ -16,4 +16,11 @@ npm start
 
 [Видео навыков](https://disk.yandex.ru/d/qsrH2beUfq98wA)
 
-[[!50 баллов](https://disk.yandex.ru/d/CVRKZ34Pepe87Q)](https://disk.yandex.ru/d/CVRKZ34Pepe87Q)
+https://user-images.githubusercontent.com/74527737/178130364-8af1debf-ca3c-4b64-a96d-f0f88ba5c33c.mp4
+
+
+https://user-images.githubusercontent.com/74527737/178130292-aafb44c2-bdb0-4220-b456-244be34eec98.mp4
+
+
+https://user-images.githubusercontent.com/74527737/178130365-2c453f51-c886-4278-8670-e05e9c293a42.mp4
+

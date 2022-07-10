@@ -10,9 +10,9 @@ npm install
 Для запуска в консоли:
 npm start
 
----
-
 Реализованы задания на 10,20,50 баллов
+
+---
 
 ## 10
 Реализуйте игру «Двадцать одно». Для взаимодействия с игроком используйте две команды: «Ещё» и «Хватит».
@@ -45,7 +45,9 @@ Webhook:https://marusia-final.herokuapp.com/marusia-edible-inedible@81246d4b-0f4
 
 «Выброшу» - пользователь отвечает что предмет не съедобный
 
-https://user-images.githubusercontent.com/74527737/178130292-aafb44c2-bdb0-4220-b456-244be34eec98.mp4
+https://user-images.githubusercontent.com/74527737/178130365-2c453f51-c886-4278-8670-e05e9c293a42.mp4
+
+
 
 ---
 
@@ -60,5 +62,5 @@ Webhook:https://marusia-final.herokuapp.com/marusia-2048@7ad9b40d-fd92-40fd-96c8
 
 «Налево», «Направо», «Вниз» и «Вверх» -команды для передвижения цифр
 
-https://user-images.githubusercontent.com/74527737/178130365-2c453f51-c886-4278-8670-e05e9c293a42.mp4
+https://user-images.githubusercontent.com/74527737/178130292-aafb44c2-bdb0-4220-b456-244be34eec98.mp4
 

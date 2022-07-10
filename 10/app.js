@@ -90,7 +90,7 @@ app.post('/marusia-twenty-one', async (res, req) => {
             "player": session_state.player,
             "marusiaScore": session_state.marusiaScore,
             "playerScore": session_state.playerScore
-        }, `${config.lossSound} Вы проиграли! Ваши карты : ${session_state.player} \n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, [
+        }, `${config.lossSound} Вы проиграли! Ваши карты : ${session_state.player} \n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`,true, [
         {
           "title": "Старт"
         }
@@ -104,7 +104,7 @@ app.post('/marusia-twenty-one', async (res, req) => {
             "player": session_state.player,
             "marusiaScore": session_state.marusiaScore,
             "playerScore": session_state.playerScore
-        }, `${config.winSound} Ничья! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, [
+        }, `${config.winSound} Ничья! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`,true, [
             {
               "title": "Старт"
             }
@@ -117,7 +117,7 @@ app.post('/marusia-twenty-one', async (res, req) => {
             "player": session_state.player,
             "marusiaScore": session_state.marusiaScore,
             "playerScore": session_state.playerScore
-        }, `${config.winSound} Вы выйграли! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`,  [
+        }, `${config.winSound} Вы выйграли! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`,true,  [
             {
               "title": "Старт"
             }
@@ -150,7 +150,7 @@ app.post('/marusia-twenty-one', async (res, req) => {
                     "player": session_state.player,
                     "marusiaScore": session_state.marusiaScore,
                     "playerScore": session_state.playerScore
-                }, `${config.lossSound} Вы проиграли! Ваши карты : ${session_state.player} \nКарты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`,  [
+                }, `${config.lossSound} Вы проиграли! Ваши карты : ${session_state.player} \nКарты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`,true,  [
                 {
                   "title": "Старт"
                 }
@@ -164,7 +164,7 @@ app.post('/marusia-twenty-one', async (res, req) => {
                     "player": session_state.player,
                     "marusiaScore": session_state.marusiaScore,
                     "playerScore": session_state.playerScore
-                }, `${config.winSound} Ничья! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, [
+                }, `${config.winSound} Ничья! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`,true, [
                     {
                       "title": "Старт"
                     }
@@ -177,7 +177,7 @@ app.post('/marusia-twenty-one', async (res, req) => {
                     "player": session_state.player,
                     "marusiaScore": session_state.marusiaScore,
                     "playerScore": session_state.playerScore
-                }, `${config.winSound} Вы выйграли! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, [
+                }, `${config.winSound} Вы выйграли! Ваши карты : ${session_state.player}\n Карты Маруси : ${session_state.marusia}\n Что бы начать заново,выполните команду "Старт"`, true,[
                     {
                       "title": "Старт"
                     }

@@ -123,7 +123,7 @@ var game ={
       }
       let found = false;
       while (!found) {
-          //find random row and column to place a 2 in
+          //find random row and column to place a 2   in
           let r = Math.floor(Math.random() * this.rows);
           let c = Math.floor(Math.random() * this.columns);
           if (this.board[r][c] == 0) {

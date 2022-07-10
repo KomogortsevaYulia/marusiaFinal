@@ -16,4 +16,4 @@ npm start
 
 [Видео навыков](https://disk.yandex.ru/d/qsrH2beUfq98wA)
 
-[![Watch the video](https://disk.yandex.ru/d/CVRKZ34Pepe87Q)](https://youtu.be/vt5fpE0bzSY)
+[![Watch the video](https://disk.yandex.ru/d/CVRKZ34Pepe87Q)](https://disk.yandex.ru/d/CVRKZ34Pepe87Q)

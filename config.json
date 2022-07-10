@@ -1,0 +1,116 @@
+{
+    "winSound": "<speaker audio=marusia-sounds/game-win-1>",
+    "lossSound": "<speaker audio=marusia-sounds/game-loss-1>",
+    "chain": [
+        {
+           
+            "title": "Апельсин",
+            "tts": "Апельсин",
+            "edible": "съем",
+            "smile":"&#127818;"
+        },
+        {
+           
+            "title": "Телефон",
+            "tts": "Телефон",
+            "edible": "выброшу",
+            "smile":" &#128241;"
+        },
+        {
+           
+            "title": "Солнце",
+            "tts": "Солнце",
+            "edible": "выброшу",
+            "smile":"&#127774;"
+        },
+        {
+           
+            "title": "Фотоаппарат",
+            "tts": "Фотоаппарат",
+            "edible": "выброшу",
+            "smile":"&#128248;"
+        },
+        {
+           
+            "title": "Ананас",
+            "tts": "Ананас",
+            "edible": "съем",
+            "smile":"&#127821;"
+        },
+        {
+           
+            "title": "Очки",
+            "tts": "Очки",
+            "edible": "выброшу",
+            "smile":"&#128374;"
+        },
+        {
+           
+            "title": "Гамбургер",
+            "tts": "Гамбургер",
+            "edible": "съем",
+            "smile":"&#127828;"
+        },
+        {
+           
+            "title": "Кошка",
+            "tts": "Кошка",
+            "edible": "выброшу",
+            "smile":"&#128008;"
+        },
+        {
+           
+            "title": "Нож",
+            "tts": "Нож",
+            "edible": "выброшу",
+            "smile":"&#128298;"
+        }
+    ],
+    "deck": [
+        {
+            "answers": 6,
+            "tts": "Шесть",
+            "value": 6
+        },
+        {
+            "answers": "7",
+            "tts": "Семь",
+            "value": 7
+        },
+        {
+            "answers": "8",
+            "tts": "Восемь",
+            "value":8
+        },
+        {
+            "answers": "9",
+            "tts": "Девять",
+            "value": 9
+        },
+        {
+            "answers": "10",
+            "tts": "Десять",
+            "value": 10
+        },
+        {
+            "answers": "Валет",
+            "tts": "Валет",
+            "value": 2
+        },
+        {
+            "answers": "Дама",
+            "tts": "Дама",
+            "value": 3
+        },
+        {
+            "answers": "Кароль",
+            "tts": "Кароль",
+            "value": 4
+        },
+        {
+            "answers": "Туз",
+            "tts": "Туз",
+            "value": 11
+        }
+    ]
+}

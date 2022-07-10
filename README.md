@@ -30,7 +30,7 @@ https://marusia-final.herokuapp.com/marusia-twenty-one@1aa5b81b-0f7b-4108-b15b-5
 
 https://user-images.githubusercontent.com/74527737/178130364-8af1debf-ca3c-4b64-a96d-f0f88ba5c33c.mp4
 
--->
+---
 
 ## 20
 Реализуйте игру «Съедобное — несъедобное». Поддержите две команды: «Съем» и «Выброшу». Каждый правильный выбор должен увеличивать длину цепочки успехов, каждая ошибка — обнулять цепочку.
@@ -46,7 +46,8 @@ Webhook:https://marusia-final.herokuapp.com/marusia-edible-inedible@81246d4b-0f4
 «Выброшу» - пользователь отвечает что предмет не съедобный
 
 https://user-images.githubusercontent.com/74527737/178130292-aafb44c2-bdb0-4220-b456-244be34eec98.mp4
--->
+
+---
 
 ## 50
 Реализуйте игру «2048». Поддержите команды «Налево», «Направо», «Вниз» и «Вверх».
